@@ -1,17 +1,17 @@
 //clase de los productos
 class Product {
- constructor(name,price,yaer){
+ constructor(name,price,year){
     this.name= name;
     this.price = price;
-    this.yaer = yaer;
+    this.year = year;
  } 
 }
 
 //clase con la que iterara el HTML  
 class UI{
     addProduct(product){
-      const productList= document.getElementById('product-list');
-      const element=  document.createElement('div');
+      const productList= document.getElementById("product-list");
+      const element=  document.createElement("div");
       element.innerHTML =`
       <div class="card text-center mb-4">
             <div class="card-body">
@@ -25,9 +25,6 @@ class UI{
       productList.appendChild(element);
     }
 
-    resetForm(){
-        document.getElementById('product-form').reset();
-    }
 
     deleteProduct(){
 
@@ -50,7 +47,6 @@ document.getElementById('product-form').addEventListener('submit',function (e){
   
     const ui = new UI(); 
     ui.addProduct(product);
-    this.resetForm();
     
     e.preventDefault();
 });
