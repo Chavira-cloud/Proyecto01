@@ -33,18 +33,22 @@ class UI{
     deleteProduct(element){
         if(element.name === 'delete'){
             element.parentElement.parentElement.parentElement.remove();
+            this.showMessage('Product Deleted Successfully','info');
         }
     }
 
-    showMessage(messega, cssClass){
+    showMessage(message, cssClass){
         const div = document.createElement('div');
-        div.className = `alert alert-${cssClass} `;
-        div.appendChild(document.createTextNode(messega));
+        div.className = `alert alert-${cssClass} mt-2 `;
+        div.appendChild(document.createTextNode(message));
         //showing in DOM
-        const container = document.querySelector('.Container');
-        const app= document.querySelector('#App');
+        const container = document.querySelector('.container');
+        const app = document.querySelector('#App');
+        container.insertBefore(div, app);
+        setTimeout(function(){
+            document.querySelector('.alert').remove();
+        },3000);
     }
-
 }       
 
 //DOM EVENT
@@ -57,9 +61,15 @@ document.getElementById('product-form').addEventListener('submit',function (e){
     const product= new Product(name,price, year);
   
     const ui = new UI(); 
+    
+    if(name === ' ' || price === ' ' || year === ' '){
+      return  ui.showMessage('Complete fields please','danger');
+    }
+
     ui.addProduct(product);
     ui.resetFrom();
-    
+    ui.showMessage('Prouct Added Success', 'success');
+
     e.preventDefault();
 });
 
